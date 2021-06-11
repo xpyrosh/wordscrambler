@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+
+// redux imports
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 import "./App.scss";
 import { Scrambler } from "./components/Scrambler";
 
@@ -80,7 +85,7 @@ function App() {
     };
 
     return (
-        <div className="App">
+        <Provider store={store}>
             <div className="container">
                 {scrambledSentence && (
                     <p id="scrambled-word">{scrambledSentence}</p>
@@ -91,11 +96,9 @@ function App() {
                 <p>The yellow blocks are meant for spaces</p>
                 <br />
                 <h2>Score: 0</h2>
-                {scrambledSentence && (
-                    <Scrambler sentence={scrambledSentence} />
-                )}
+                <Scrambler sentence={scrambledSentence} />
             </div>
-        </div>
+        </Provider>
     );
 }
 

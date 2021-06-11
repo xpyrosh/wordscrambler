@@ -1,8 +1,12 @@
 import React from "react";
 import { Word } from "./Word";
+import PropTypes from "prop-types";
 
 export const Scrambler = ({ sentence }) => {
-    const words = sentence.split(" ");
+    let words = [];
+    if (sentence) {
+        words = sentence.split(" ");
+    }
     // console.log(words);
     return (
         <div className="scrambler">
@@ -22,4 +26,8 @@ export const Scrambler = ({ sentence }) => {
                 })}
         </div>
     );
+};
+
+Scrambler.propTypes = {
+    sentence: PropTypes.string.isRequired,
 };
