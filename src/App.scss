@@ -35,29 +35,30 @@ body {
 .word {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 .character {
+    background: #e1e1e1;
+    width: 100%;
     input {
         text-align: center;
-        background: #e1e1e1;
+        background: none;
         border: none;
         min-width: 0px;
         font-size: 1rem;
         padding: 0.5rem;
-        flex-basis: 0;
         &:focus {
             outline: none;
         }
     }
+}
 
-    .success {
-        background: #4caf50;
-        color: #fff;
-    }
+.success {
+    background: #4caf50;
+    color: #fff;
+}
 
-    .space {
-        background: #ffb74d;
-    }
+.space {
+    background: #ffb74d;
 }

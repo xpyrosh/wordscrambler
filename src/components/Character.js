@@ -12,7 +12,11 @@ export const Character = ({ character, hasSpace }) => {
         }
     };
     return (
-        <div className="character">
+        <div
+            className={`character ${
+                success ? "success" : hasSpace ? "space" : ""
+            }`}
+        >
             <input
                 type="text"
                 name="name"
@@ -20,9 +24,7 @@ export const Character = ({ character, hasSpace }) => {
                 maxLength="1"
                 size="1"
                 onChange={handleChange}
-                className={`input ${
-                    success ? "success" : hasSpace ? "space" : ""
-                }`}
+                className="input"
                 autoComplete="off"
             ></input>
         </div>
