@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.scss";
+import { Scrambler } from "./components/Scrambler";
 
 function App() {
     const [sentence, setSentence] = useState();
@@ -18,7 +19,7 @@ function App() {
             await axios
                 .get(`https://api.hatchways.io/assessment/sentences/1`)
                 .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                     setSentence(res.data.data.sentence);
                     setScrambledSentence(
                         scrambleSentence(res.data.data.sentence)
@@ -90,6 +91,9 @@ function App() {
                 <p>The yellow blocks are meant for spaces</p>
                 <br />
                 <h2>Score: 0</h2>
+                {scrambledSentence && (
+                    <Scrambler sentence={scrambledSentence} />
+                )}
             </div>
         </div>
     );

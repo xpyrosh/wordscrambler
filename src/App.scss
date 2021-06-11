@@ -23,3 +23,18 @@ body {
     font-size: 1.75rem;
     font-weight: bold;
 }
+
+.input {
+    background: #e1e1e1;
+    border: none;
+    font-size: 1rem;
+    padding: 0.5rem;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.success {
+    background: #4caf50;
+}
