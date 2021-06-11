@@ -4,10 +4,11 @@ const initialState = {
     level: 1,
     sentence: null,
     scrambledSentence: null,
-    words: null,
+    words: [],
+    input: [],
+    goal: [],
     success: false,
     loading: false,
-    input: [],
 };
 
 export const sentenceReducer = (state = initialState, action) => {
@@ -17,6 +18,8 @@ export const sentenceReducer = (state = initialState, action) => {
                 ...state,
                 sentence: action.payload.sentence,
                 scrambledSentence: action.payload.scrambledSentence,
+                words: action.payload.sentence.split(" "),
+                goal: action.payload.sentence.split(""),
                 loading: false,
             };
         case SET_LOADING:

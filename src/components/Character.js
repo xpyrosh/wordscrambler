@@ -11,6 +11,10 @@ export const Character = ({ character, hasSpace }) => {
             setSuccess(false);
         }
     };
+
+    const keyedDown = (e) => {
+        console.log(e.key);
+    };
     return (
         <div
             className={`character ${
@@ -24,6 +28,7 @@ export const Character = ({ character, hasSpace }) => {
                 maxLength="1"
                 size="1"
                 onChange={handleChange}
+                onKeyDown={keyedDown}
                 className="input"
                 autoComplete="off"
             ></input>

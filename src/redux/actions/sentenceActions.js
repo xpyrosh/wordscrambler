@@ -18,8 +18,8 @@ export const getSentence = (level) => async (dispatch) => {
                 dispatch({
                     type: GET_SENTENCE,
                     payload: {
-                        sentence: sentence,
-                        scrambledSentence: scrambledSentence,
+                        sentence: sentence.toLowerCase(),
+                        scrambledSentence: scrambledSentence.toLowerCase(),
                     },
                 });
             });
