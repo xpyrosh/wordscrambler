@@ -8,13 +8,6 @@ const Scrambler = ({
     sentence: { words, scrambledSentence, level, loading, success },
     getSentence,
 }) => {
-    // // split sentence into individual words once we have it
-    // let words = [];
-    // if (sentence) {
-    //     words = sentence.split(" ");
-    // }
-    // console.log(words);
-
     useEffect(() => {
         getSentence(level);
 
@@ -33,7 +26,6 @@ const Scrambler = ({
                     <h2>Score: {level - 1}</h2>
                     {words &&
                         words.map((word, index) => {
-                            console.log(word);
                             if (index === words.length - 1) {
                                 return <Word key={index} word={word} />;
                             } else {

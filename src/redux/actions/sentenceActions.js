@@ -1,7 +1,7 @@
-import { GET_SENTENCE, SET_LOADING } from "../types";
+import { GET_SENTENCE, SET_LOADING, SET_INPUT, REMOVE_INPUT } from "../types";
 import axios from "axios";
 
-// fetch sentence
+// FETCH SENTENCE
 export const getSentence = (level) => async (dispatch) => {
     try {
         setLoading();
@@ -26,6 +26,34 @@ export const getSentence = (level) => async (dispatch) => {
     } catch (err) {
         console.error(err);
     }
+};
+
+// SET INPUT
+export const setInput = (input) => async (dispatch) => {
+    try {
+        dispatch({
+            type: SET_INPUT,
+            payload: input,
+        });
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+// REMOVE INPUT
+export const removeInput = () => {
+    console.log("this is remove input");
+    return {
+        type: REMOVE_INPUT,
+    };
+};
+
+// SET LOADING
+export const setLoading = () => {
+    console.log("Loading...");
+    return {
+        type: SET_LOADING,
+    };
 };
 
 // sentence scrambler helper function
@@ -75,11 +103,4 @@ const scrambleSentence = (sentence) => {
     // convert new sentence array to string and return
     newSentence = newSentence.join(" ");
     return newSentence;
-};
-
-// set loading
-export const setLoading = () => {
-    return {
-        type: SET_LOADING,
-    };
 };

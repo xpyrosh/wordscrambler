@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 
-export const Character = ({ character, hasSpace }) => {
+// redux imports
+import { connect } from "react-redux";
+import { setInput, removeInput } from "../redux/actions/sentenceActions";
+import PropTypes from "prop-types";
+
+const Character = ({ character, hasSpace, setInput }) => {
     const [success, setSuccess] = useState();
 
     const handleChange = (e) => {
         if (e.target.value === character) {
-            console.log("Success");
+            // console.log("Success");
             setSuccess(true);
         } else {
             setSuccess(false);
@@ -13,7 +18,15 @@ export const Character = ({ character, hasSpace }) => {
     };
 
     const keyedDown = (e) => {
-        console.log(e.key);
+        // check for space or a letter
+        if (e.keyCode === 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+            // console.log(String.fromCharCode(e.keyCode).toLowerCase());
+            setInput(String.fromCharCode(e.keyCode).toLowerCase());
+        }
+        // check for backspace
+        else if (e.keyCode === 8) {
+            removeInput();
+        }
     };
     return (
         <div
@@ -35,3 +48,15 @@ export const Character = ({ character, hasSpace }) => {
         </div>
     );
 };
+
+Character.propTypes = {
+    setInput: PropTypes.func.isRequired,
+    removeInput: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+    // define state
+    sentence: state.sentence,
+});
+
+export default connect(mapStateToProps, { setInput, removeInput })(Character);

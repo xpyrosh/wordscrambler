@@ -1,4 +1,4 @@
-import { GET_SENTENCE, SET_LOADING } from "../types";
+import { GET_SENTENCE, SET_LOADING, SET_INPUT, REMOVE_INPUT } from "../types";
 
 const initialState = {
     level: 1,
@@ -22,7 +22,20 @@ export const sentenceReducer = (state = initialState, action) => {
                 goal: action.payload.sentence.split(""),
                 loading: false,
             };
+        case SET_INPUT:
+            console.log("setting input");
+            return {
+                ...state,
+                input: [...state.input, action.payload],
+            };
+        case REMOVE_INPUT:
+            console.log("removing");
+            return {
+                ...state,
+                input: [...state.input.slice(0, -1)],
+            };
         case SET_LOADING:
+            console.log("loading in reducer");
             return {
                 ...state,
                 loading: true,

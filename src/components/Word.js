@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Character } from "./Character";
+import React from "react";
+import Character from "./Character";
 
 export const Word = ({ word, hasSpace }) => {
     const characters = word.split("");
