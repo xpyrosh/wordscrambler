@@ -9,10 +9,15 @@ export const Scrambler = ({ sentence }) => {
             {words &&
                 words.map((word, index) => {
                     if (index === words.length - 1) {
-                        // return <p key={word}>{word}</p>;
-                        return <Word key={word} word={word} />;
+                        return <Word key={index} word={word} />;
                     } else {
-                        return <Word key={word} word={word + " "} />;
+                        return (
+                            <Word
+                                key={index}
+                                word={word + " "}
+                                hasSpace={true}
+                            />
+                        );
                     }
                 })}
         </div>

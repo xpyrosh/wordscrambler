@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const Character = ({ character }) => {
+export const Character = ({ character, hasSpace }) => {
     const [success, setSuccess] = useState();
 
     const handleChange = (e) => {
@@ -18,9 +18,11 @@ export const Character = ({ character }) => {
                 name="name"
                 required
                 maxLength="1"
-                size="10"
+                size="1"
                 onChange={handleChange}
-                className={`input ${success ? "success" : ""}`}
+                className={`input ${
+                    success ? "success" : hasSpace ? "space" : ""
+                }`}
                 autoComplete="off"
             ></input>
         </div>

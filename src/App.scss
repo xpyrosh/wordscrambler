@@ -25,6 +25,7 @@ body {
 }
 
 .scrambler {
+    padding-top: 1rem;
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -33,23 +34,30 @@ body {
 
 .word {
     display: flex;
-    // justify-content: space-evenly;
+    justify-content: center;
     gap: 1rem;
 }
 
 .character {
     input {
+        text-align: center;
         background: #e1e1e1;
         border: none;
+        min-width: 0px;
         font-size: 1rem;
         padding: 0.5rem;
         flex-basis: 0;
-        min- &:focus {
+        &:focus {
             outline: none;
         }
     }
 
     .success {
         background: #4caf50;
+        color: #fff;
+    }
+
+    .space {
+        background: #ffb74d;
     }
 }
