@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./App.css";
+import "./App.scss";
 
 function App() {
     const [sentence, setSentence] = useState();
@@ -80,12 +80,17 @@ function App() {
 
     return (
         <div className="App">
-            {sentence && <p id="scrambled-word">{sentence}</p>}
-            {scrambledSentence && (
-                <p id="scrambled-word">{scrambledSentence}</p>
-            )}
-
-            {/* {sentence && scrambleSentence(sentence)} */}
+            <div className="container">
+                {scrambledSentence && (
+                    <p id="scrambled-word">{scrambledSentence}</p>
+                )}
+                <br />
+                <p>Guess the sentence! Start typing</p>
+                <br />
+                <p>The yellow blocks are meant for spaces</p>
+                <br />
+                <h2>Score: 0</h2>
+            </div>
         </div>
     );
 }
