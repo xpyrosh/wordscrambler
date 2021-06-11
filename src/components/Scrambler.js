@@ -16,7 +16,7 @@ const Scrambler = ({
 
     return (
         <div>
-            {!loading && !success ? (
+            {!loading ? (
                 <div className="scrambler">
                     {scrambledSentence && (
                         <p id="scrambled-word">{scrambledSentence}</p>
@@ -42,6 +42,7 @@ const Scrambler = ({
             ) : (
                 <h1>Loading...</h1>
             )}
+            {success && <button className="next-button">Next</button>}
         </div>
     );
 };

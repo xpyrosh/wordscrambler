@@ -46,6 +46,28 @@ export const setInput = (input) => async (dispatch) => {
     }
 };
 
+// CHECK SUCCESS
+export const checkSuccess = (input, goal) => async (dispatch) => {
+    try {
+        console.log(input);
+        console.log(goal);
+        if (input.length === goal.length) {
+            for (let i = 0; i < input.length; i++) {
+                if (input[i] !== goal[i]) return false;
+            }
+            console.log("we did it");
+            dispatch({
+                type: SET_SUCCESS,
+            });
+        }
+        // return {
+        //     type: CHECK_SUCCESS,
+        // };
+    } catch (err) {
+        console.error(err);
+    }
+};
+
 // REMOVE INPUT
 export const removeInput = () => {
     try {
@@ -65,8 +87,6 @@ export const setLoading = () => {
         type: SET_LOADING,
     };
 };
-
-// CHECK SUCCESS
 
 // sentence scrambler helper function
 const scrambleSentence = (sentence) => {

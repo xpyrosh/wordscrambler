@@ -30,13 +30,12 @@ export const sentenceReducer = (state = initialState, action) => {
                 success: false,
             };
         case SET_INPUT:
-            console.log("setting input");
             return {
                 ...state,
                 input: [...state.input, action.payload],
             };
+
         case REMOVE_INPUT:
-            console.log("removing input");
             return {
                 ...state,
                 input: state.input.slice(0, -1),

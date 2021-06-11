@@ -2,16 +2,28 @@ import React, { useState } from "react";
 
 // redux imports
 import { connect } from "react-redux";
-import { setInput, removeInput } from "../redux/actions/sentenceActions";
+import {
+    setInput,
+    removeInput,
+    checkSuccess,
+} from "../redux/actions/sentenceActions";
 import PropTypes from "prop-types";
 
-const Character = ({ character, hasSpace, setInput, removeInput }) => {
+const Character = ({
+    sentence: { input, goal },
+    character,
+    hasSpace,
+    setInput,
+    removeInput,
+    checkSuccess,
+}) => {
     const [success, setSuccess] = useState();
 
     const handleChange = (e) => {
-        if (e.target.value === character) {
+        if (e.target.value === character && input.length <= goal.length) {
             // console.log("Success");
             setSuccess(true);
+            checkSuccess(input, goal);
         } else {
             setSuccess(false);
         }
@@ -59,4 +71,8 @@ const mapStateToProps = (state) => ({
     sentence: state.sentence,
 });
 
-export default connect(mapStateToProps, { setInput, removeInput })(Character);
+export default connect(mapStateToProps, {
+    setInput,
+    removeInput,
+    checkSuccess,
+})(Character);
