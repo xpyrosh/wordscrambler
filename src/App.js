@@ -4,11 +4,15 @@ import "./App.css";
 
 function App() {
     const [sentence, setSentence] = useState();
+    const [scrambledSentence, setScrambledSentence] = useState();
 
     useEffect(() => {
         fetchSentence();
+
+        // eslint-disable-next-line
     }, []);
 
+    // fetch sentence using axios and set to state
     const fetchSentence = async () => {
         try {
             await axios
@@ -16,12 +20,16 @@ function App() {
                 .then((res) => {
                     console.log(res);
                     setSentence(res.data.data.sentence);
+                    setScrambledSentence(
+                        scrambleSentence(res.data.data.sentence)
+                    );
                 });
         } catch (err) {
             console.log(err);
         }
     };
 
+    // Sentence word scrambled
     const scrambleSentence = (sentence) => {
         // break sentence into words
         const words = sentence.split(" ");
@@ -73,8 +81,11 @@ function App() {
     return (
         <div className="App">
             {sentence && <p id="scrambled-word">{sentence}</p>}
+            {scrambledSentence && (
+                <p id="scrambled-word">{scrambledSentence}</p>
+            )}
 
-            {sentence && scrambleSentence(sentence)}
+            {/* {sentence && scrambleSentence(sentence)} */}
         </div>
     );
 }
