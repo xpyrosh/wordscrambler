@@ -1,29 +1,14 @@
 import React, { useState } from "react";
+import { Character } from "./Character";
 
 export const Word = ({ word }) => {
-    const [success, setSuccess] = useState();
-
-    const handleChange = (e) => {
-        if (e.target.value === word) {
-            console.log("Success");
-            setSuccess(true);
-        } else {
-            setSuccess(false);
-        }
-    };
+    const characters = word.split("");
     return (
-        <div>
-            <p>{word}</p>
-            <input
-                type="text"
-                name="name"
-                required
-                maxLength={word.length}
-                size="10"
-                onChange={handleChange}
-                className={`input ${success ? "success" : ""}`}
-                autoComplete="off"
-            ></input>
+        <div className="word">
+            {characters &&
+                characters.map((char, index) => {
+                    return <Character key={index} character={char} />;
+                })}
         </div>
     );
 };

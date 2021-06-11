@@ -5,7 +5,7 @@ export const Scrambler = ({ sentence }) => {
     const words = sentence.split(" ");
     // console.log(words);
     return (
-        <div>
+        <div className="scrambler">
             {words &&
                 words.map((word, index) => {
                     if (index === words.length - 1) {

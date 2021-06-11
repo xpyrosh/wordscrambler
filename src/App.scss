@@ -24,17 +24,32 @@ body {
     font-weight: bold;
 }
 
-.input {
-    background: #e1e1e1;
-    border: none;
-    font-size: 1rem;
-    padding: 0.5rem;
-
-    &:focus {
-        outline: none;
-    }
+.scrambler {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    min-width: 0px;
 }
 
-.success {
-    background: #4caf50;
+.word {
+    display: flex;
+    // justify-content: space-evenly;
+    gap: 1rem;
+}
+
+.character {
+    input {
+        background: #e1e1e1;
+        border: none;
+        font-size: 1rem;
+        padding: 0.5rem;
+        flex-basis: 0;
+        min- &:focus {
+            outline: none;
+        }
+    }
+
+    .success {
+        background: #4caf50;
+    }
 }
