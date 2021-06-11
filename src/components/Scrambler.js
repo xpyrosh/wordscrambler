@@ -1,18 +1,24 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getSentence } from "../redux/actions/sentenceActions";
+import { getSentence, nextPhrase } from "../redux/actions/sentenceActions";
 import PropTypes from "prop-types";
 import { Word } from "./Word";
 
 const Scrambler = ({
     sentence: { words, scrambledSentence, level, loading, success },
     getSentence,
+    nextPhrase,
 }) => {
     useEffect(() => {
         getSentence(level);
 
         // eslint-disable-next-line
     }, []);
+
+    const clickHandler = () => {
+        nextPhrase(level);
+        getSentence(level + 1);
+    };
 
     return (
         <div>
@@ -42,13 +48,18 @@ const Scrambler = ({
             ) : (
                 <h1>Loading...</h1>
             )}
-            {success && <button className="next-button">Next</button>}
+            {success && (
+                <button className="next-button" onClick={clickHandler}>
+                    Next
+                </button>
+            )}
         </div>
     );
 };
 
 Scrambler.propTypes = {
     getSentence: PropTypes.func.isRequired,
+    nextPhrase: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -56,4 +67,4 @@ const mapStateToProps = (state) => ({
     sentence: state.sentence,
 });
 
-export default connect(mapStateToProps, { getSentence })(Scrambler);
+export default connect(mapStateToProps, { getSentence, nextPhrase })(Scrambler);

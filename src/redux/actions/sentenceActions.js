@@ -4,6 +4,7 @@ import {
     SET_INPUT,
     REMOVE_INPUT,
     SET_SUCCESS,
+    NEXT_PHRASE,
 } from "../types";
 import axios from "axios";
 
@@ -49,20 +50,16 @@ export const setInput = (input) => async (dispatch) => {
 // CHECK SUCCESS
 export const checkSuccess = (input, goal) => async (dispatch) => {
     try {
-        console.log(input);
-        console.log(goal);
+        // test array equality
         if (input.length === goal.length) {
             for (let i = 0; i < input.length; i++) {
                 if (input[i] !== goal[i]) return false;
             }
-            console.log("we did it");
+            // if the two arrays match we have our success condition
             dispatch({
                 type: SET_SUCCESS,
             });
         }
-        // return {
-        //     type: CHECK_SUCCESS,
-        // };
     } catch (err) {
         console.error(err);
     }
@@ -75,6 +72,17 @@ export const removeInput = () => {
         return {
             type: REMOVE_INPUT,
         };
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+// NEXT PHRASE
+export const nextPhrase = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: NEXT_PHRASE,
+        });
     } catch (err) {
         console.error(err);
     }

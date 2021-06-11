@@ -4,6 +4,7 @@ import {
     SET_INPUT,
     REMOVE_INPUT,
     SET_SUCCESS,
+    NEXT_PHRASE,
 } from "../types";
 
 const initialState = {
@@ -34,7 +35,17 @@ export const sentenceReducer = (state = initialState, action) => {
                 ...state,
                 input: [...state.input, action.payload],
             };
-
+        case SET_SUCCESS:
+            return {
+                ...state,
+                success: true,
+            };
+        case NEXT_PHRASE:
+            return {
+                ...state,
+                level: state.level + 1,
+                input: [],
+            };
         case REMOVE_INPUT:
             return {
                 ...state,
@@ -45,11 +56,6 @@ export const sentenceReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
-            };
-        case SET_SUCCESS:
-            return {
-                ...state,
-                success: true,
             };
         default:
             return state;
