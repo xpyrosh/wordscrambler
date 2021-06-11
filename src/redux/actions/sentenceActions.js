@@ -1,4 +1,10 @@
-import { GET_SENTENCE, SET_LOADING, SET_INPUT, REMOVE_INPUT } from "../types";
+import {
+    GET_SENTENCE,
+    SET_LOADING,
+    SET_INPUT,
+    REMOVE_INPUT,
+    SET_SUCCESS,
+} from "../types";
 import axios from "axios";
 
 // FETCH SENTENCE
@@ -42,10 +48,14 @@ export const setInput = (input) => async (dispatch) => {
 
 // REMOVE INPUT
 export const removeInput = () => {
-    console.log("this is remove input");
-    return {
-        type: REMOVE_INPUT,
-    };
+    try {
+        console.log("remove reached in actions");
+        return {
+            type: REMOVE_INPUT,
+        };
+    } catch (err) {
+        console.error(err);
+    }
 };
 
 // SET LOADING
@@ -55,6 +65,8 @@ export const setLoading = () => {
         type: SET_LOADING,
     };
 };
+
+// CHECK SUCCESS
 
 // sentence scrambler helper function
 const scrambleSentence = (sentence) => {

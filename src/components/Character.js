@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { setInput, removeInput } from "../redux/actions/sentenceActions";
 import PropTypes from "prop-types";
 
-const Character = ({ character, hasSpace, setInput }) => {
+const Character = ({ character, hasSpace, setInput, removeInput }) => {
     const [success, setSuccess] = useState();
 
     const handleChange = (e) => {
