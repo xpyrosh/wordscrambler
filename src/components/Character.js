@@ -33,12 +33,15 @@ const Character = ({
     const keyedDown = (e) => {
         // check for space or a letter
         if (e.keyCode === 32 || (e.keyCode > 64 && e.keyCode < 91)) {
-            // console.log(String.fromCharCode(e.keyCode).toLowerCase());
-            setInput(String.fromCharCode(e.keyCode).toLowerCase());
+            if (!e.target.value) {
+                setInput(String.fromCharCode(e.keyCode).toLowerCase());
+            }
         }
         // check for backspace
         else if (e.keyCode === 8) {
-            removeInput();
+            if (e.target.value) {
+                removeInput();
+            }
         }
     };
     return (
