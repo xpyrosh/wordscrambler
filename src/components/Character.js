@@ -74,14 +74,6 @@ const Character = ({
             }
         }
 
-        if (
-            parseInt(wordIndex) === words.length - 1 &&
-            parseInt(charIndex) === wordSize - 1 &&
-            success
-        ) {
-            console.log("we got here");
-        }
-
         // fetch the next sibiling
         const nextSibiling = document.querySelector(
             `textarea[name=${sibilingName}]`
@@ -116,6 +108,21 @@ const Character = ({
         let max = 5;
         if (e.target.value.length > max) {
             e.target.value(e.target.value.substr(0, max));
+        }
+
+        // FOCUS BUTTON if phrase is matched
+        // check if final character of final word
+        if (
+            parseInt(wordIndex) === words.length - 1 &&
+            parseInt(charIndex) === wordSize - 1 &&
+            success
+        ) {
+            // find and focus on the next button so we can just hit enter for the next phrase
+            const nextButton = document.querySelector(`button[type="submit"]`);
+
+            if (nextButton !== null) {
+                nextButton.focus();
+            }
         }
     };
     return (

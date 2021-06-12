@@ -18,7 +18,9 @@ const Scrambler = ({
 
     const clickHandler = () => {
         nextPhrase(level);
-        getSentence(level + 1);
+        if (level < 10) {
+            getSentence(level + 1);
+        }
     };
 
     return (
