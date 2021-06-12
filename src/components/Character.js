@@ -47,6 +47,14 @@ const Character = ({
             }
         }
     };
+
+    const keyedUp = (e) => {
+        // KEY UP function required to force android deveices to adhere to textarea max length constraints
+        let max = 5;
+        if (e.target.value.length > max) {
+            e.target.value(e.target.value.substr(0, max));
+        }
+    };
     return (
         <textarea
             type="text"
@@ -58,6 +66,7 @@ const Character = ({
             size="1"
             onChange={handleChange}
             onKeyDown={keyedDown}
+            onKeyUp={keyedUp}
             className={`character ${
                 success ? "success" : hasSpace ? "space" : ""
             }`}
