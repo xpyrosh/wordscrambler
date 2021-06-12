@@ -21,8 +21,9 @@ const Character = ({
 
     const handleChange = (e) => {
         if (e.target.value === character && input.length <= goal.length) {
-            // console.log("Success");
+            // set local character success
             setSuccess(true);
+            // check phrase success and dispatch success state if true
             checkSuccess(input, goal);
         } else {
             setSuccess(false);

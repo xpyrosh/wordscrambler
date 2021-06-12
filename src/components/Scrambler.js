@@ -33,11 +33,16 @@ const Scrambler = ({
                     {words &&
                         words.map((word, index) => {
                             if (index === words.length - 1) {
-                                return <Word key={index} word={word} />;
+                                return (
+                                    <Word
+                                        key={word + index + level}
+                                        word={word}
+                                    />
+                                );
                             } else {
                                 return (
                                     <Word
-                                        key={index}
+                                        key={word + index + level}
                                         word={word + " "}
                                         hasSpace={true}
                                     />
