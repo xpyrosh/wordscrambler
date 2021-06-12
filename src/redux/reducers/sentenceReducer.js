@@ -52,7 +52,6 @@ export const sentenceReducer = (state = initialState, action) => {
                 input: state.input.slice(0, -1),
             };
         case SET_LOADING:
-            console.log("loading in reducer");
             return {
                 ...state,
                 loading: true,

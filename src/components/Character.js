@@ -10,8 +10,11 @@ import {
 import PropTypes from "prop-types";
 
 const Character = ({
-    sentence: { input, goal },
+    wordIndex,
+    charIndex,
     character,
+    wordSize,
+    sentence: { input, goal },
     hasSpace,
     setInput,
     removeInput,
@@ -30,6 +33,37 @@ const Character = ({
             checkSuccess(input, goal);
         } else {
             setSuccess(false);
+        }
+
+        setFocus(e);
+    };
+
+    const setFocus = (e) => {
+        // set next focus
+        const { maxLength, value, name } = e.target;
+        const [inputName, wordIndex, charIndex] = name.split("-");
+
+        if (value.length >= maxLength) {
+            let sibilingName;
+
+            // select next sibiling in word or start at next word on input
+            if (parseInt(charIndex) === wordSize - 1) {
+                sibilingName = `char-${parseInt(wordIndex) + 1}-0`;
+            } else {
+                sibilingName = `char-${parseInt(wordIndex)}-${
+                    parseInt(charIndex) + 1
+                }`;
+            }
+
+            // fetch the next sibiling
+            const nextSibiling = document.querySelector(
+                `textarea[name=${sibilingName}]`
+            );
+
+            // if we fetched one then focus it
+            if (nextSibiling !== null) {
+                nextSibiling.focus();
+            }
         }
     };
 
@@ -58,7 +92,7 @@ const Character = ({
     return (
         <textarea
             type="text"
-            name="name"
+            name={`char-${wordIndex}-${charIndex}`}
             rows="1"
             cols="1"
             required

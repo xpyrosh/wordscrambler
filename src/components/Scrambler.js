@@ -23,7 +23,6 @@ const Scrambler = ({
 
     return (
         <div>
-            {/* <input style={{ marginTop: "1rem" }} type="text"></input> */}
             {!loading && score < 10 ? (
                 <div className="scrambler">
                     {scrambledSentence && (
@@ -39,6 +38,7 @@ const Scrambler = ({
                                     <Word
                                         key={word + index + level}
                                         word={word}
+                                        wordIndex={index}
                                     />
                                 );
                             } else {
@@ -47,6 +47,7 @@ const Scrambler = ({
                                         key={word + index + level}
                                         word={word + " "}
                                         hasSpace={true}
+                                        wordIndex={index}
                                     />
                                 );
                             }

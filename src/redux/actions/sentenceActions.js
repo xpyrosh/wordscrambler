@@ -68,7 +68,6 @@ export const checkSuccess = (input, goal) => async (dispatch) => {
 // REMOVE INPUT
 export const removeInput = () => {
     try {
-        console.log("remove reached in actions");
         return {
             type: REMOVE_INPUT,
         };

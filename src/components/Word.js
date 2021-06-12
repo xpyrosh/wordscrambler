@@ -1,8 +1,9 @@
 import React from "react";
 import Character from "./Character";
 
-export const Word = ({ word, hasSpace }) => {
+export const Word = ({ word, hasSpace, wordIndex }) => {
     const characters = word.split("");
+
     return (
         <div className="word">
             {characters &&
@@ -10,6 +11,9 @@ export const Word = ({ word, hasSpace }) => {
                     return (
                         <Character
                             key={index}
+                            wordIndex={wordIndex}
+                            wordSize={word.length}
+                            charIndex={index}
                             character={char}
                             hasSpace={
                                 index === characters.length - 1 && hasSpace
