@@ -14,7 +14,8 @@ const Character = ({
     charIndex,
     character,
     wordSize,
-    sentence: { input, goal },
+    sentenceLength,
+    sentence: { input, goal, words },
     hasSpace,
     setInput,
     removeInput,
@@ -38,14 +39,13 @@ const Character = ({
         setFocus(e);
     };
 
-    const setFocus = (e) => {
+    const setFocus = (e, isBackSpace) => {
         // set next focus
         const { maxLength, value, name } = e.target;
         const [inputName, wordIndex, charIndex] = name.split("-");
+        let sibilingName;
 
         if (value.length >= maxLength) {
-            let sibilingName;
-
             // select next sibiling in word or start at next word on input
             if (parseInt(charIndex) === wordSize - 1) {
                 sibilingName = `char-${parseInt(wordIndex) + 1}-0`;
@@ -54,16 +54,35 @@ const Character = ({
                     parseInt(charIndex) + 1
                 }`;
             }
+        } else {
+            // if we backspace without a character
+            if (isBackSpace) {
+                // if we are at the first character we need to find the index of the last character of the previous word
+                if (parseInt(charIndex) === 0) {
+                    let newWordIndex = words[wordIndex - 1].length;
 
-            // fetch the next sibiling
-            const nextSibiling = document.querySelector(
-                `textarea[name=${sibilingName}]`
-            );
-
-            // if we fetched one then focus it
-            if (nextSibiling !== null) {
-                nextSibiling.focus();
+                    sibilingName = `char-${
+                        parseInt(wordIndex) - 1
+                    }-${newWordIndex}`;
+                    console.log(sibilingName);
+                }
+                // if we're not the last character just move to the previous character
+                else {
+                    sibilingName = `char-${parseInt(wordIndex)}-${
+                        parseInt(charIndex) - 1
+                    }`;
+                }
             }
+        }
+
+        // fetch the next sibiling
+        const nextSibiling = document.querySelector(
+            `textarea[name=${sibilingName}]`
+        );
+
+        // if we fetched one then focus it
+        if (nextSibiling !== null) {
+            nextSibiling.focus();
         }
     };
 
@@ -76,9 +95,12 @@ const Character = ({
         }
         // check for backspace
         else if (e.keyCode === 8) {
-            if (e.target.value) {
-                removeInput();
-            }
+            removeInput();
+            setFocus(e, true);
+        }
+        // disable enter on text area
+        else if (e.keyCode == 13) {
+            e.preventDefault();
         }
     };
 

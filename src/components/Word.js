@@ -1,7 +1,7 @@
 import React from "react";
 import Character from "./Character";
 
-export const Word = ({ word, hasSpace, wordIndex }) => {
+export const Word = ({ word, hasSpace, wordIndex, sentenceLength }) => {
     const characters = word.split("");
 
     return (
