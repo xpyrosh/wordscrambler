@@ -58,8 +58,13 @@ const Scrambler = ({
             ) : (
                 <h1>Loading...</h1>
             )}
+
             {success && score < 10 && (
-                <button className="next-button" onClick={clickHandler}>
+                <button
+                    type="submit"
+                    className="next-button"
+                    onClick={clickHandler}
+                >
                     Next
                 </button>
             )}

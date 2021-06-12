@@ -15,25 +15,25 @@ const Character = ({
     character,
     wordSize,
     sentenceLength,
-    sentence: { input, goal, words },
+    sentence: { input, goal, words, success },
     hasSpace,
     setInput,
     removeInput,
     checkSuccess,
 }) => {
-    const [success, setSuccess] = useState();
+    const [match, setMatch] = useState();
 
     const handleChange = (e) => {
         if (
             e.target.value.toLowerCase() === character &&
             input.length <= goal.length
         ) {
-            // set local character success
-            setSuccess(true);
-            // check phrase success and dispatch success state if true
+            // set local character match
+            setMatch(true);
+            // check phrase match and dispatch success state if true
             checkSuccess(input, goal);
         } else {
-            setSuccess(false);
+            setMatch(false);
         }
 
         setFocus(e);
@@ -64,7 +64,6 @@ const Character = ({
                     sibilingName = `char-${
                         parseInt(wordIndex) - 1
                     }-${newWordIndex}`;
-                    console.log(sibilingName);
                 }
                 // if we're not the last character just move to the previous character
                 else {
@@ -73,6 +72,14 @@ const Character = ({
                     }`;
                 }
             }
+        }
+
+        if (
+            parseInt(wordIndex) === words.length - 1 &&
+            parseInt(charIndex) === wordSize - 1 &&
+            success
+        ) {
+            console.log("we got here");
         }
 
         // fetch the next sibiling
@@ -99,7 +106,7 @@ const Character = ({
             setFocus(e, true);
         }
         // disable enter on text area
-        else if (e.keyCode == 13) {
+        else if (e.keyCode === 13) {
             e.preventDefault();
         }
     };
@@ -123,9 +130,7 @@ const Character = ({
             onChange={handleChange}
             onKeyDown={keyedDown}
             onKeyUp={keyedUp}
-            className={`character ${
-                success ? "success" : hasSpace ? "space" : ""
-            }`}
+            className={`character ${match ? "match" : hasSpace ? "space" : ""}`}
             autoComplete="off"
         />
     );
