@@ -20,7 +20,10 @@ const Character = ({
     const [success, setSuccess] = useState();
 
     const handleChange = (e) => {
-        if (e.target.value === character && input.length <= goal.length) {
+        if (
+            e.target.value.toLowerCase() === character &&
+            input.length <= goal.length
+        ) {
             // set local character success
             setSuccess(true);
             // check phrase success and dispatch success state if true
