@@ -45,23 +45,21 @@ const Character = ({
         }
     };
     return (
-        <div
+        <textarea
+            type="text"
+            name="name"
+            rows="1"
+            cols="1"
+            required
+            maxLength="1"
+            size="1"
+            onChange={handleChange}
+            onKeyDown={keyedDown}
             className={`character ${
                 success ? "success" : hasSpace ? "space" : ""
             }`}
-        >
-            <input
-                type="text"
-                name="name"
-                required
-                maxLength="1"
-                size="1"
-                onChange={handleChange}
-                onKeyDown={keyedDown}
-                className="input"
-                autoComplete="off"
-            ></input>
-        </div>
+            autoComplete="off"
+        />
     );
 };
 

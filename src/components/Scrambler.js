@@ -23,6 +23,7 @@ const Scrambler = ({
 
     return (
         <div>
+            {/* <input style={{ marginTop: "1rem" }} type="text"></input> */}
             {!loading && score < 10 ? (
                 <div className="scrambler">
                     {scrambledSentence && (
