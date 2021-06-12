@@ -9,6 +9,7 @@ const Scrambler = ({
     getSentence,
     nextPhrase,
 }) => {
+    const score = level - 1;
     useEffect(() => {
         getSentence(level);
 
@@ -22,7 +23,7 @@ const Scrambler = ({
 
     return (
         <div>
-            {!loading ? (
+            {!loading && score < 10 ? (
                 <div className="scrambler">
                     {scrambledSentence && (
                         <p id="scrambled-word">{scrambledSentence}</p>
@@ -50,10 +51,12 @@ const Scrambler = ({
                             }
                         })}
                 </div>
+            ) : score >= 10 ? (
+                <h3>You win!</h3>
             ) : (
                 <h1>Loading...</h1>
             )}
-            {success && (
+            {success && score < 10 && (
                 <button className="next-button" onClick={clickHandler}>
                     Next
                 </button>
