@@ -45,6 +45,14 @@ const Character = ({
         const [inputName, wordIndex, charIndex] = name.split("-");
         let sibilingName;
 
+        // if at initial index dont try to refocus to a spot that doesn't exist
+        if (
+            parseInt(wordIndex) === 0 &&
+            parseInt(charIndex) === 0 &&
+            isBackSpace
+        )
+            return;
+
         if (value.length >= maxLength) {
             // select next sibiling in word or start at next word on input
             if (parseInt(charIndex) === wordSize - 1) {
@@ -137,6 +145,7 @@ const Character = ({
             onChange={handleChange}
             onKeyDown={keyedDown}
             onKeyUp={keyedUp}
+            onMouseDown={(e) => e.preventDefault()}
             className={`character ${match ? "match" : hasSpace ? "space" : ""}`}
             autoComplete="off"
         />

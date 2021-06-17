@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import { connect } from "react-redux";
 import { getSentence, nextPhrase } from "../redux/actions/sentenceActions";
 import PropTypes from "prop-types";
@@ -12,7 +13,7 @@ const Scrambler = ({
     const score = level - 1;
     useEffect(() => {
         getSentence(level);
-
+        wordsApi();
         // eslint-disable-next-line
     }, []);
 
@@ -20,6 +21,18 @@ const Scrambler = ({
         nextPhrase(level);
         if (level < 10) {
             getSentence(level + 1);
+        }
+    };
+
+    const wordsApi = async () => {
+        try {
+            await axios
+                .get("https://random-words-api-two.vercel.app/word")
+                .then((res) => {
+                    console.log(res);
+                });
+        } catch (err) {
+            console.error(err);
         }
     };
 
