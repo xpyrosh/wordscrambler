@@ -6,7 +6,7 @@ import {
     setInput,
     removeInput,
     checkSuccess,
-} from "../redux/actions/sentenceActions";
+} from "../redux/actions/scramblerActions";
 import PropTypes from "prop-types";
 
 const Character = ({
@@ -14,8 +14,7 @@ const Character = ({
     charIndex,
     character,
     wordSize,
-    sentenceLength,
-    sentence: { input, goal, words, success },
+    scrambler: { input, goal, words, success },
     hasSpace,
     setInput,
     removeInput,
@@ -159,7 +158,7 @@ Character.propTypes = {
 
 const mapStateToProps = (state) => ({
     // define state
-    sentence: state.sentence,
+    scrambler: state.scrambler,
 });
 
 export default connect(mapStateToProps, {

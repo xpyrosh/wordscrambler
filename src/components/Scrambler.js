@@ -1,26 +1,27 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { getSentence, nextPhrase } from "../redux/actions/sentenceActions";
+import { getSentence, nextPhrase } from "../redux/actions/scramblerActions";
 import PropTypes from "prop-types";
 import { Word } from "./Word";
 
 const Scrambler = ({
-    sentence: { words, scrambledSentence, level, loading, success },
+    scrambler: { words, scrambledSentence, score, loading, success },
     getSentence,
     nextPhrase,
 }) => {
-    const score = level - 1;
+    // const score = score - 1;
     useEffect(() => {
-        getSentence(level);
+        getSentence(score);
         wordsApi();
         // eslint-disable-next-line
     }, []);
 
+    // REFACTOR NEXTPHRASE TO NEXTLEVEL AND MAKE IT DO THE GETSENTENCE/GETLEVEL LOGIC?
     const clickHandler = () => {
-        nextPhrase(level);
-        if (level < 10) {
-            getSentence(level + 1);
+        nextPhrase(score);
+        if (score < 10) {
+            getSentence(score + 1);
         }
     };
 
@@ -45,13 +46,13 @@ const Scrambler = ({
                     )}
                     <p>Guess the sentence! Start typing</p>
                     <p>The yellow blocks are meant for spaces</p>
-                    <h2>Score: {level - 1}</h2>
+                    <h2>Score: {score}</h2>
                     {words &&
                         words.map((word, index) => {
                             if (index === words.length - 1) {
                                 return (
                                     <Word
-                                        key={word + index + level}
+                                        key={word + index + score}
                                         word={word}
                                         wordIndex={index}
                                     />
@@ -59,7 +60,7 @@ const Scrambler = ({
                             } else {
                                 return (
                                     <Word
-                                        key={word + index + level}
+                                        key={word + index + score}
                                         word={word + " "}
                                         hasSpace={true}
                                         wordIndex={index}
@@ -94,7 +95,7 @@ Scrambler.propTypes = {
 
 const mapStateToProps = (state) => ({
     // define state
-    sentence: state.sentence,
+    scrambler: state.scrambler,
 });
 
 export default connect(mapStateToProps, { getSentence, nextPhrase })(Scrambler);

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Character from "./Character";
 
-export const Word = ({ word, hasSpace, wordIndex, sentenceLength }) => {
+export const Word = ({ word, hasSpace, wordIndex }) => {
     const characters = word.split("");
 
     useEffect(() => {

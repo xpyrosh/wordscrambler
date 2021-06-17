@@ -8,13 +8,13 @@ import {
 } from "../types";
 import axios from "axios";
 
-// FETCH SENTENCE
+// FETCH LEVEL DATA
 export const getSentence = (level) => async (dispatch) => {
     try {
         setLoading();
 
         await axios
-            .get(`https://api.hatchways.io/assessment/sentences/${level}`)
+            .get(`https://api.hatchways.io/assessment/sentences/${level + 1}`)
             .then((res) => {
                 // console.log(res);
                 const sentence = res.data.data.sentence;

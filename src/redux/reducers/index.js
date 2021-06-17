@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 // import reducers:
-import { sentenceReducer } from "./sentenceReducer";
+import { scramblerReducer } from "./scramblerReducer";
 
 export default combineReducers({
     // set all reducers below
-    sentence: sentenceReducer,
+    scrambler: scramblerReducer,
 });

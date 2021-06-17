@@ -8,7 +8,7 @@ import {
 } from "../types";
 
 const initialState = {
-    level: 1,
+    score: 0,
     sentence: null,
     scrambledSentence: null,
     words: [],
@@ -18,7 +18,7 @@ const initialState = {
     loading: false,
 };
 
-export const sentenceReducer = (state = initialState, action) => {
+export const scramblerReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_SENTENCE:
             return {
@@ -43,7 +43,7 @@ export const sentenceReducer = (state = initialState, action) => {
         case NEXT_PHRASE:
             return {
                 ...state,
-                level: state.level + 1,
+                score: state.score + 1,
                 input: [],
             };
         case REMOVE_INPUT:
