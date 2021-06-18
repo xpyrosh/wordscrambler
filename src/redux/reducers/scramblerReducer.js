@@ -1,5 +1,5 @@
 import {
-    GET_SENTENCE,
+    GET_DATA,
     SET_LOADING,
     SET_INPUT,
     REMOVE_INPUT,
@@ -9,24 +9,29 @@ import {
 
 const initialState = {
     score: 0,
-    sentence: null,
-    scrambledSentence: null,
+    level: {
+        goal: null,
+        hint: null,
+    },
+    scrambledData: null,
     words: [],
     input: [],
     goal: [],
+    total: 0,
+    mistakes: 0,
     success: false,
     loading: false,
 };
 
 export const scramblerReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_SENTENCE:
+        case GET_DATA:
             return {
                 ...state,
-                sentence: action.payload.sentence,
-                scrambledSentence: action.payload.scrambledSentence,
-                words: action.payload.sentence.split(" "),
-                goal: action.payload.sentence.split(""),
+                level: { goal: action.payload.data, hint: action.payload.hint },
+                scrambledData: action.payload.scrambledData,
+                words: action.payload.data.split(" "),
+                goal: action.payload.data.split(""),
                 loading: false,
                 success: false,
             };

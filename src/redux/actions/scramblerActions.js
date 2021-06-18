@@ -1,5 +1,5 @@
 import {
-    GET_SENTENCE,
+    GET_DATA,
     SET_LOADING,
     SET_INPUT,
     REMOVE_INPUT,
@@ -9,27 +9,29 @@ import {
 import axios from "axios";
 
 // FETCH LEVEL DATA
-export const getLevelData = (mode, level) => async (dispatch) => {
+export const getLevelData = (mode, score) => async (dispatch) => {
     try {
         setLoading();
 
-        await axios
-            .get(`https://api.hatchways.io/assessment/sentences/${level + 1}`)
-            .then((res) => {
-                // console.log(res);
-                const sentence = res.data.data.sentence;
-                const scrambledSentence = scrambleSentence(
-                    res.data.data.sentence
-                );
+        const level = score + 1;
+        if (level <= 10) {
+            await axios
+                .get(`https://api.hatchways.io/assessment/sentences/${level}`)
+                .then((res) => {
+                    // console.log(res);
+                    const data = res.data.data.sentence;
+                    const scrambledData = scrambleData(res.data.data.sentence);
 
-                dispatch({
-                    type: GET_SENTENCE,
-                    payload: {
-                        sentence: sentence.toLowerCase(),
-                        scrambledSentence: scrambledSentence.toLowerCase(),
-                    },
+                    dispatch({
+                        type: GET_DATA,
+                        payload: {
+                            data: data.toLowerCase(),
+                            hint: "Guess the sentence! Start typing",
+                            scrambledData: scrambledData.toLowerCase(),
+                        },
+                    });
                 });
-            });
+        }
     } catch (err) {
         console.error(err);
     }
@@ -96,12 +98,12 @@ export const setLoading = () => {
 };
 
 // sentence scrambler helper function
-const scrambleSentence = (sentence) => {
-    // break sentence into words
-    const words = sentence.split(" ");
+const scrambleData = (data) => {
+    // break data into words
+    const words = data.split(" ");
 
-    // new sentence
-    let newSentence = [];
+    // new data
+    let newData = [];
 
     // do something for each word
     words.forEach((word) => {
@@ -131,15 +133,15 @@ const scrambleSentence = (sentence) => {
             // convert mixed letters back into a word
             newWord = newWord.join("");
 
-            // add scrambled word to sentence
-            newSentence.push(newWord);
+            // add scrambled word to data
+            newData.push(newWord);
         } else {
-            // put unscrambled word into sentence
-            newSentence.push(word);
+            // put unscrambled word into data
+            newData.push(word);
         }
     });
 
-    // convert new sentence array to string and return
-    newSentence = newSentence.join(" ");
-    return newSentence;
+    // convert new data array to string and return
+    newData = newData.join(" ");
+    return newData;
 };

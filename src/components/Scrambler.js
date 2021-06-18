@@ -6,12 +6,13 @@ import PropTypes from "prop-types";
 import { Word } from "./Word";
 
 const Scrambler = ({
-    scrambler: { words, scrambledSentence, score, loading, success },
+    scrambler: { words, scrambledData, score, loading, success },
     getLevelData,
     nextPhrase,
 }) => {
-    // temp mode
+    // temp mode ~ pass mode from home as prop [classic, words, wordsreverse, kanye, trump]
     const mode = "mode";
+
     useEffect(() => {
         getLevelData(mode, score);
         wordsApi();
@@ -31,7 +32,7 @@ const Scrambler = ({
             await axios
                 .get("https://random-words-api-two.vercel.app/word")
                 .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                 });
         } catch (err) {
             console.error(err);
@@ -42,10 +43,9 @@ const Scrambler = ({
         <div>
             {!loading && score < 10 ? (
                 <div className="scrambler">
-                    {scrambledSentence && (
-                        <p id="scrambled-word">{scrambledSentence}</p>
+                    {scrambledData && (
+                        <p id="scrambled-word">{scrambledData}</p>
                     )}
-                    <br />
                     <p>Guess the sentence! Start typing</p>
                     <p>The yellow blocks are meant for spaces</p>
                     <br />
