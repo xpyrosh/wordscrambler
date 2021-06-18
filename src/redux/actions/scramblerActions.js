@@ -5,6 +5,7 @@ import {
     REMOVE_INPUT,
     SET_SUCCESS,
     UPDATE_SCORE,
+    INCREMENT_MISTAKES,
 } from "../types";
 import axios from "axios";
 
@@ -27,6 +28,7 @@ export const getLevelData = (mode, score) => async (dispatch) => {
                         payload: {
                             data: data.toLowerCase(),
                             hint: "Guess the sentence! Start typing",
+                            chars: data.split("").length,
                             scrambledData: scrambledData.toLowerCase(),
                         },
                     });
@@ -78,11 +80,22 @@ export const removeInput = () => {
     }
 };
 
-// NEXT PHRASE
-export const nextPhrase = () => async (dispatch) => {
+// UPDATE SCORE
+export const updateScore = () => async (dispatch) => {
     try {
         dispatch({
             type: UPDATE_SCORE,
+        });
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+// UPDATE/INCREMENT MISTAKES
+export const incrementMistakes = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: INCREMENT_MISTAKES,
         });
     } catch (err) {
         console.error(err);

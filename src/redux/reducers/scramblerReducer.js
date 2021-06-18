@@ -5,6 +5,7 @@ import {
     REMOVE_INPUT,
     SET_SUCCESS,
     UPDATE_SCORE,
+    INCREMENT_MISTAKES,
 } from "../types";
 
 const initialState = {
@@ -17,7 +18,7 @@ const initialState = {
     words: [],
     input: [],
     goal: [],
-    total: 0,
+    totalChars: 0,
     mistakes: 0,
     success: false,
     loading: false,
@@ -30,6 +31,7 @@ export const scramblerReducer = (state = initialState, action) => {
                 ...state,
                 level: { goal: action.payload.data, hint: action.payload.hint },
                 scrambledData: action.payload.scrambledData,
+                totalChars: state.totalChars + action.payload.chars,
                 words: action.payload.data.split(" "),
                 goal: action.payload.data.split(""),
                 loading: false,
@@ -50,6 +52,11 @@ export const scramblerReducer = (state = initialState, action) => {
                 ...state,
                 score: state.score + 1,
                 input: [],
+            };
+        case INCREMENT_MISTAKES:
+            return {
+                ...state,
+                mistakes: state.mistakes + 1,
             };
         case REMOVE_INPUT:
             return {

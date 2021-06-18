@@ -6,6 +6,7 @@ import {
     setInput,
     removeInput,
     checkSuccess,
+    incrementMistakes,
 } from "../redux/actions/scramblerActions";
 import PropTypes from "prop-types";
 
@@ -19,6 +20,7 @@ const Character = ({
     setInput,
     removeInput,
     checkSuccess,
+    incrementMistakes,
 }) => {
     const [match, setMatch] = useState();
 
@@ -33,6 +35,7 @@ const Character = ({
             checkSuccess(input, goal);
         } else {
             setMatch(false);
+            incrementMistakes();
         }
 
         setFocus(e);
@@ -154,6 +157,8 @@ const Character = ({
 Character.propTypes = {
     setInput: PropTypes.func.isRequired,
     removeInput: PropTypes.func.isRequired,
+    checkSuccess: PropTypes.func.isRequired,
+    incrementMistakes: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -165,4 +170,5 @@ export default connect(mapStateToProps, {
     setInput,
     removeInput,
     checkSuccess,
+    incrementMistakes,
 })(Character);
