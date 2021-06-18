@@ -1,27 +1,28 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { getSentence, nextPhrase } from "../redux/actions/scramblerActions";
+import { getLevelData, nextPhrase } from "../redux/actions/scramblerActions";
 import PropTypes from "prop-types";
 import { Word } from "./Word";
 
 const Scrambler = ({
     scrambler: { words, scrambledSentence, score, loading, success },
-    getSentence,
+    getLevelData,
     nextPhrase,
 }) => {
-    // const score = score - 1;
+    // temp mode
+    const mode = "mode";
     useEffect(() => {
-        getSentence(score);
+        getLevelData(mode, score);
         wordsApi();
         // eslint-disable-next-line
     }, []);
 
-    // REFACTOR NEXTPHRASE TO NEXTLEVEL AND MAKE IT DO THE GETSENTENCE/GETLEVEL LOGIC?
+    // REFACTOR NEXTPHRASE TO NEXTLEVEL AND MAKE IT DO THE getLevelData/GETLEVEL LOGIC?
     const clickHandler = () => {
         nextPhrase(score);
         if (score < 10) {
-            getSentence(score + 1);
+            getLevelData(mode, score + 1);
         }
     };
 
@@ -89,7 +90,7 @@ const Scrambler = ({
 };
 
 Scrambler.propTypes = {
-    getSentence: PropTypes.func.isRequired,
+    getLevelData: PropTypes.func.isRequired,
     nextPhrase: PropTypes.func.isRequired,
 };
 
@@ -98,4 +99,6 @@ const mapStateToProps = (state) => ({
     scrambler: state.scrambler,
 });
 
-export default connect(mapStateToProps, { getSentence, nextPhrase })(Scrambler);
+export default connect(mapStateToProps, { getLevelData, nextPhrase })(
+    Scrambler
+);

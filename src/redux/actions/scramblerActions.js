@@ -4,12 +4,12 @@ import {
     SET_INPUT,
     REMOVE_INPUT,
     SET_SUCCESS,
-    NEXT_PHRASE,
+    UPDATE_SCORE,
 } from "../types";
 import axios from "axios";
 
 // FETCH LEVEL DATA
-export const getSentence = (level) => async (dispatch) => {
+export const getLevelData = (mode, level) => async (dispatch) => {
     try {
         setLoading();
 
@@ -80,7 +80,7 @@ export const removeInput = () => {
 export const nextPhrase = () => async (dispatch) => {
     try {
         dispatch({
-            type: NEXT_PHRASE,
+            type: UPDATE_SCORE,
         });
     } catch (err) {
         console.error(err);

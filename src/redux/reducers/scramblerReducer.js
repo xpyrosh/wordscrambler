@@ -4,7 +4,7 @@ import {
     SET_INPUT,
     REMOVE_INPUT,
     SET_SUCCESS,
-    NEXT_PHRASE,
+    UPDATE_SCORE,
 } from "../types";
 
 const initialState = {
@@ -40,7 +40,7 @@ export const scramblerReducer = (state = initialState, action) => {
                 ...state,
                 success: true,
             };
-        case NEXT_PHRASE:
+        case UPDATE_SCORE:
             return {
                 ...state,
                 score: state.score + 1,
