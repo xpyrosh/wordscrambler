@@ -29,7 +29,7 @@ body {
     color: #24518e;
     font-size: 1.75rem;
     font-weight: bold;
-    padding-bottom: 0.5rem;
+    padding: 1.5rem 0;
 }
 
 .scrambler {
@@ -38,6 +38,9 @@ body {
     grid-template-columns: 1fr;
     gap: 1rem;
     min-width: 0px;
+    p {
+        line-height: 0;
+    }
 }
 
 .word {
@@ -55,7 +58,7 @@ textarea {
     margin: 0;
     text-align: center;
     background: none;
-    border: none;
+    border: 3px solid #a9a9a9;
     font-family: "Press Start 2P", cursive;
     font-size: 1rem;
     padding: 0.5rem;
@@ -69,10 +72,12 @@ textarea {
 .match {
     background: #4caf50;
     color: #fff;
+    border: 3px solid #37a03b;
 }
 
 .space {
     background: #ffb74d;
+    border: 3px solid #eea12d;
 }
 
 .next-button {

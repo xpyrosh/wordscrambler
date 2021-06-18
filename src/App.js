@@ -10,7 +10,7 @@ import Scrambler from "./components/Scrambler";
 function App() {
     return (
         <Provider store={store}>
-            <div className="container">
+            <div className="nes-container is-rounded container">
                 <Scrambler />
             </div>
         </Provider>
