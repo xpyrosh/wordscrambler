@@ -45,8 +45,10 @@ const Scrambler = ({
                     {scrambledSentence && (
                         <p id="scrambled-word">{scrambledSentence}</p>
                     )}
+                    <br />
                     <p>Guess the sentence! Start typing</p>
                     <p>The yellow blocks are meant for spaces</p>
+                    <br />
                     <h2>Score: {score}</h2>
                     {words &&
                         words.map((word, index) => {
