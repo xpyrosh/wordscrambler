@@ -19,6 +19,7 @@ const initialState = {
     words: [],
     input: [],
     goal: [],
+    mode: "menu",
     totalChars: 0,
     mistakes: 0,
     startTime: null,

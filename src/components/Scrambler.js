@@ -24,10 +24,10 @@ const Scrambler = ({
     getLevelData,
     updateScore,
     beginTime,
+    mode,
 }) => {
     // temp mode ~ pass mode from home as prop [classic, words, wordsreverse, kanye, trump]
-    const mode = "mode";
-    const start = new Date();
+    mode = "mode";
 
     useEffect(() => {
         getLevelData(mode, score);
@@ -57,7 +57,7 @@ const Scrambler = ({
     };
 
     return (
-        <div>
+        <div className="nes-container is-rounded container">
             {!loading && score < 10 ? (
                 <div className="scrambler">
                     {scrambledData && (
@@ -103,7 +103,12 @@ const Scrambler = ({
 
                     {/* Calculate time elasped */}
                     <p>
-                        Time: {endTime.getMinutes() - startTime.getMinutes()}:
+                        Time:{" "}
+                        {endTime.getMinutes() - startTime.getMinutes() >= 0
+                            ? endTime.getMinutes() - startTime.getMinutes()
+                            : endTime.getMinutes +
+                              (60 - startTime.getMinutes())}
+                        :
                         {Math.abs(
                             endTime.getSeconds() - startTime.getSeconds()
                         ).toLocaleString("en-US", { minimumIntegerDigits: 2 })}

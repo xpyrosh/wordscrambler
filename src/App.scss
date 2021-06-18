@@ -25,6 +25,7 @@ body {
     transform: translate(-50%, -50%);
 }
 
+// SCRAMBLER STYLING
 #scrambled-word {
     color: #24518e;
     font-size: 1.75rem;
@@ -40,15 +41,29 @@ body {
     min-width: 0px;
     p {
         line-height: 0;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 }
 
+.next-button {
+    padding: 0.5rem 1rem;
+    background: #4caf50;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+// WORD COMPONENT STYLES
 .word {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
 }
 
+// CHARACTER COMPONENT STYLES
 .character {
     background: #e1e1e1;
     width: 100%;
@@ -80,12 +95,24 @@ textarea {
     border: 3px solid #eea12d;
 }
 
-.next-button {
-    padding: 0.5rem 1rem;
-    background: #4caf50;
-    color: #fff;
-    font-size: 1rem;
-    outline: none;
-    border: none;
-    cursor: pointer;
+// HOME STYLING
+.home {
+    .title {
+        font-size: 3rem;
+        color: #fff;
+        text-align: center;
+        margin-top: 4rem;
+    }
+    .menu {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+    .dialog {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // margin-top: 3rem;
+    }
 }
