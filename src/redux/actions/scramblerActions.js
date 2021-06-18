@@ -6,6 +6,7 @@ import {
     SET_SUCCESS,
     UPDATE_SCORE,
     INCREMENT_MISTAKES,
+    START_TIME,
 } from "../types";
 import axios from "axios";
 
@@ -34,6 +35,18 @@ export const getLevelData = (mode, score) => async (dispatch) => {
                     });
                 });
         }
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+// START TIME
+export const beginTime = () => (dispatch) => {
+    try {
+        dispatch({
+            type: START_TIME,
+            payload: new Date(),
+        });
     } catch (err) {
         console.error(err);
     }

@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import { getLevelData, updateScore } from "../redux/actions/scramblerActions";
+import {
+    getLevelData,
+    updateScore,
+    beginTime,
+} from "../redux/actions/scramblerActions";
 import PropTypes from "prop-types";
 import { Word } from "./Word";
 
@@ -14,15 +18,20 @@ const Scrambler = ({
         success,
         totalChars,
         mistakes,
+        startTime,
+        endTime,
     },
     getLevelData,
     updateScore,
+    beginTime,
 }) => {
     // temp mode ~ pass mode from home as prop [classic, words, wordsreverse, kanye, trump]
     const mode = "mode";
+    const start = new Date();
 
     useEffect(() => {
         getLevelData(mode, score);
+        beginTime();
         wordsApi();
         // eslint-disable-next-line
     }, []);
@@ -84,12 +93,21 @@ const Scrambler = ({
                 <>
                     <h3>You win!</h3>
                     <br />
+                    {/* Calculate input accuracy */}
                     <p>
                         Accuracy:{" "}
                         {((totalChars / (totalChars + mistakes)) * 100).toFixed(
                             2
                         )}
                         %
+                    </p>
+                    <br />
+                    {/* Calculate time elasped */}
+                    <p>
+                        Time: {endTime.getMinutes() - startTime.getMinutes()}:
+                        {(
+                            endTime.getSeconds() - startTime.getSeconds()
+                        ).toLocaleString("en-US", { minimumIntegerDigits: 2 })}
                     </p>
                 </>
             ) : (
@@ -112,6 +130,7 @@ const Scrambler = ({
 Scrambler.propTypes = {
     getLevelData: PropTypes.func.isRequired,
     updateScore: PropTypes.func.isRequired,
+    beginTime: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -119,6 +138,8 @@ const mapStateToProps = (state) => ({
     scrambler: state.scrambler,
 });
 
-export default connect(mapStateToProps, { getLevelData, updateScore })(
-    Scrambler
-);
+export default connect(mapStateToProps, {
+    getLevelData,
+    updateScore,
+    beginTime,
+})(Scrambler);

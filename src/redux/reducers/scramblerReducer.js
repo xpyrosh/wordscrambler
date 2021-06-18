@@ -6,6 +6,7 @@ import {
     SET_SUCCESS,
     UPDATE_SCORE,
     INCREMENT_MISTAKES,
+    START_TIME,
 } from "../types";
 
 const initialState = {
@@ -20,6 +21,8 @@ const initialState = {
     goal: [],
     totalChars: 0,
     mistakes: 0,
+    startTime: null,
+    endTime: null,
     success: false,
     loading: false,
 };
@@ -42,10 +45,16 @@ export const scramblerReducer = (state = initialState, action) => {
                 ...state,
                 input: [...state.input, action.payload],
             };
+        case START_TIME:
+            return {
+                ...state,
+                startTime: action.payload,
+            };
         case SET_SUCCESS:
             return {
                 ...state,
                 success: true,
+                endTime: new Date(),
             };
         case UPDATE_SCORE:
             return {

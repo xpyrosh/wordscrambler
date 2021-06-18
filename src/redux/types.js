@@ -4,4 +4,5 @@ export const REMOVE_INPUT = "REMOVE_INPUT";
 export const SET_SUCCESS = "SET_SUCCESS";
 export const UPDATE_SCORE = "UPDATE_SCORE";
 export const INCREMENT_MISTAKES = "INCREMENT_MISTAKES";
+export const START_TIME = "START_TIME";
 export const SET_LOADING = "SET_LOADING";
