@@ -104,7 +104,7 @@ const Scrambler = ({
                     {/* Calculate time elasped */}
                     <p>
                         Time: {endTime.getMinutes() - startTime.getMinutes()}:
-                        {(
+                        {Math.abs(
                             endTime.getSeconds() - startTime.getSeconds()
                         ).toLocaleString("en-US", { minimumIntegerDigits: 2 })}
                     </p>
