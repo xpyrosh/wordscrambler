@@ -30,7 +30,7 @@ body {
     color: #24518e;
     font-size: 1.75rem;
     font-weight: bold;
-    padding: 1.5rem 0;
+    padding-top: 1.5rem;
 }
 
 .scrambler {
@@ -109,10 +109,12 @@ textarea {
         justify-content: center;
         align-items: center;
     }
-    .dialog {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        // margin-top: 3rem;
-    }
+}
+
+// DIALOG STYLING
+.dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
 }

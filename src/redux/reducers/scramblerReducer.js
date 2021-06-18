@@ -7,6 +7,7 @@ import {
     UPDATE_SCORE,
     INCREMENT_MISTAKES,
     START_TIME,
+    SET_MODE,
 } from "../types";
 
 const initialState = {
@@ -50,6 +51,11 @@ export const scramblerReducer = (state = initialState, action) => {
             return {
                 ...state,
                 startTime: action.payload,
+            };
+        case SET_MODE:
+            return {
+                ...state,
+                mode: action.payload,
             };
         case SET_SUCCESS:
             return {

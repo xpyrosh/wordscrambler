@@ -7,6 +7,7 @@ import {
     UPDATE_SCORE,
     INCREMENT_MISTAKES,
     START_TIME,
+    SET_MODE,
 } from "../types";
 import axios from "axios";
 
@@ -15,25 +16,40 @@ export const getLevelData = (mode, score) => async (dispatch) => {
     try {
         setLoading();
 
+        let fetchURL, data, scrambledData, hint;
+
+        if (mode === "classic") {
+            const level = score + 1;
+            fetchURL = `https://api.hatchways.io/assessment/sentences/${level}`;
+        } else if (mode === "words") {
+            fetchURL = "https://random-words-api-two.vercel.app/word";
+        }
+
         const level = score + 1;
         if (level <= 10) {
-            await axios
-                .get(`https://api.hatchways.io/assessment/sentences/${level}`)
-                .then((res) => {
-                    // console.log(res);
-                    const data = res.data.data.sentence;
-                    const scrambledData = scrambleData(res.data.data.sentence);
+            await axios.get(fetchURL).then((res) => {
+                // console.log(res);
 
-                    dispatch({
-                        type: GET_DATA,
-                        payload: {
-                            data: data.toLowerCase(),
-                            hint: "Guess the sentence! Start typing",
-                            chars: data.split("").length,
-                            scrambledData: scrambledData.toLowerCase(),
-                        },
-                    });
+                if (mode === "classic") {
+                    data = res.data.data.sentence;
+                    scrambledData = scrambleData(res.data.data.sentence);
+                    hint = "Decipher the sentence.";
+                } else if (mode === "words") {
+                    data = res.data[0].word;
+                    scrambledData = scrambleData(res.data[0].word);
+                    hint = res.data[0].definition;
+                }
+
+                dispatch({
+                    type: GET_DATA,
+                    payload: {
+                        data: data.toLowerCase(),
+                        hint: hint,
+                        chars: data.split("").length,
+                        scrambledData: scrambledData.toLowerCase(),
+                    },
                 });
+            });
         }
     } catch (err) {
         console.error(err);
@@ -58,6 +74,18 @@ export const setInput = (input) => async (dispatch) => {
         dispatch({
             type: SET_INPUT,
             payload: input,
+        });
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+// SET GAME MODE
+export const setMode = (mode) => (dispatch) => {
+    try {
+        dispatch({
+            type: SET_MODE,
+            payload: mode,
         });
     } catch (err) {
         console.error(err);

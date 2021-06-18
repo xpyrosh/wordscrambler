@@ -7,12 +7,17 @@ import {
     beginTime,
 } from "../redux/actions/scramblerActions";
 import PropTypes from "prop-types";
+
+import Dialog from "./Dialog";
 import { Word } from "./Word";
+
+import bookguy from "../img/bookguy.png";
 
 const Scrambler = ({
     scrambler: {
         words,
         scrambledData,
+        level: { hint },
         score,
         loading,
         success,
@@ -20,15 +25,12 @@ const Scrambler = ({
         mistakes,
         startTime,
         endTime,
+        mode,
     },
     getLevelData,
     updateScore,
     beginTime,
-    mode,
 }) => {
-    // temp mode ~ pass mode from home as prop [classic, words, wordsreverse, kanye, trump]
-    mode = "mode";
-
     useEffect(() => {
         getLevelData(mode, score);
         beginTime();
@@ -36,8 +38,7 @@ const Scrambler = ({
         // eslint-disable-next-line
     }, []);
 
-    // REFACTOR updateScore TO NEXTLEVEL AND MAKE IT DO THE getLevelData/GETLEVEL LOGIC?
-    const clickHandler = () => {
+    const nextHandler = () => {
         updateScore(score);
         if (score < 10) {
             getLevelData(mode, score + 1);
@@ -49,7 +50,9 @@ const Scrambler = ({
             await axios
                 .get("https://random-words-api-two.vercel.app/word")
                 .then((res) => {
-                    // console.log(res);
+                    console.log(res);
+                    console.log(res.data);
+                    console.log(res.data[0].word);
                 });
         } catch (err) {
             console.error(err);
@@ -63,6 +66,7 @@ const Scrambler = ({
                     {scrambledData && (
                         <p id="scrambled-word">{scrambledData}</p>
                     )}
+                    <Dialog message={hint} mascot={bookguy} />
                     <p>Guess the sentence! Start typing</p>
                     <p>The yellow blocks are meant for spaces</p>
                     <h2>Score: {score}</h2>
@@ -122,7 +126,7 @@ const Scrambler = ({
                 <button
                     type="submit"
                     className="nes-btn is-success next-button"
-                    onClick={clickHandler}
+                    onClick={nextHandler}
                 >
                     Next
                 </button>

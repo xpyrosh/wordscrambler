@@ -6,3 +6,4 @@ export const UPDATE_SCORE = "UPDATE_SCORE";
 export const INCREMENT_MISTAKES = "INCREMENT_MISTAKES";
 export const START_TIME = "START_TIME";
 export const SET_LOADING = "SET_LOADING";
+export const SET_MODE = "SET_MODE";
