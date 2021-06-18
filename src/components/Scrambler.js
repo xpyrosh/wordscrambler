@@ -116,7 +116,7 @@ const Scrambler = ({
             {success && score < 10 && (
                 <button
                     type="submit"
-                    className="next-button"
+                    className="nes-btn is-success next-button"
                     onClick={clickHandler}
                 >
                     Next
