@@ -84,8 +84,16 @@ const Scrambler = ({
                     {/* <button type="button" class="nes-btn is-primary">
                         Hint
                     </button> */}
-                    <p>Guess the sentence! Start typing</p>
-                    <p>The yellow blocks are meant for spaces</p>
+                    <p>Unscramble the puzzle! Start typing.</p>
+                    {mode === "classic" && (
+                        <p>
+                            The{" "}
+                            <span style={{ color: "#ffb74d" }}>
+                                yellow blocks
+                            </span>{" "}
+                            are meant for spaces
+                        </p>
+                    )}
                     <h2>Score: {score}</h2>
                     {words &&
                         words.map((word, index) => {

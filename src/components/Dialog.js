@@ -10,12 +10,7 @@ const Dialog = ({ message, mascot, pronunciation }) => {
             />
             <div className="nes-balloon from-left">
                 <p>{message}</p>
-                {pronunciation && (
-                    <>
-                        <br />
-                        <p>It's pronounced.. "{pronunciation}"</p>
-                    </>
-                )}
+                {pronunciation && <p>It's pronounced.. "{pronunciation}"</p>}
             </div>
         </div>
     );
