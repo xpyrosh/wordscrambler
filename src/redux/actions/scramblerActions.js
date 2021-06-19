@@ -44,7 +44,7 @@ export const getLevelData = (mode, score) => async (dispatch) => {
                     type: GET_DATA,
                     payload: {
                         data: data.toLowerCase(),
-                        hint: hint,
+                        hint: `Here's the description: "${hint}"`,
                         chars: data.split("").length,
                         scrambledData: scrambledData.toLowerCase(),
                     },

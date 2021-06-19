@@ -34,7 +34,7 @@ const Scrambler = ({
     useEffect(() => {
         getLevelData(mode, score);
         beginTime();
-        wordsApi();
+
         // eslint-disable-next-line
     }, []);
 
@@ -45,24 +45,34 @@ const Scrambler = ({
         }
     };
 
-    const wordsApi = async () => {
-        try {
-            await axios
-                .get("https://random-words-api-two.vercel.app/word")
-                .then((res) => {
-                    console.log(res);
-                    console.log(res.data);
-                    console.log(res.data[0].word);
-                });
-        } catch (err) {
-            console.error(err);
+    // new focus function to find next blank and focus it when not given an initial spot to focus next from
+    // function designed to refocus while enabling keyboard only; before since mouse input was disabled there was no way to continue inputting after tabbing or stopping
+    const setFocusV2 = (words) => {
+        for (let i = 0; i < words.length; i++) {
+            let nextFocus;
+            for (let x = 0; x < words[i].length; x++) {
+                nextFocus = document.querySelector(
+                    `textarea[name=char-${i}-${x}]`
+                );
+
+                if (!nextFocus.value) {
+                    nextFocus.focus();
+                    return;
+                }
+            }
         }
     };
 
     return (
         <div className="nes-container is-rounded container">
             {!loading && score < 10 ? (
-                <div className="scrambler">
+                <div
+                    className="scrambler"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setFocusV2(words);
+                    }}
+                >
                     {scrambledData && (
                         <p id="scrambled-word">{scrambledData}</p>
                     )}

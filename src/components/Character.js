@@ -42,7 +42,7 @@ const Character = ({
     };
 
     const setFocus = (e, isBackSpace) => {
-        // set next focus
+        // set next input focus
         const { maxLength, value, name } = e.target;
         const [inputName, wordIndex, charIndex] = name.split("-");
         let sibilingName;
@@ -89,6 +89,8 @@ const Character = ({
             `textarea[name=${sibilingName}]`
         );
 
+        // nextSibiling.value = "";
+
         // if we fetched one then focus it
         if (nextSibiling !== null) {
             nextSibiling.focus();
@@ -115,6 +117,7 @@ const Character = ({
 
     const keyedUp = (e) => {
         // KEY UP function required to force android deveices to adhere to textarea max length constraints
+        // ***** Doesn't work ******
         let max = 5;
         if (e.target.value.length > max) {
             e.target.value(e.target.value.substr(0, max));
@@ -147,7 +150,11 @@ const Character = ({
             onChange={handleChange}
             onKeyDown={keyedDown}
             onKeyUp={keyedUp}
-            onMouseDown={(e) => e.preventDefault()}
+            onMouseDown={(e) => {
+                // if (e.target.name !== "char-0-0") {
+                e.preventDefault();
+                // }
+            }}
             className={`character ${match ? "match" : hasSpace ? "space" : ""}`}
             autoComplete="off"
         />
