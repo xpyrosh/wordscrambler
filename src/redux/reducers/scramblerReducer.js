@@ -15,6 +15,7 @@ const initialState = {
     level: {
         goal: null,
         hint: null,
+        pronunciation: null,
     },
     scrambledData: null,
     words: [],
@@ -34,7 +35,11 @@ export const scramblerReducer = (state = initialState, action) => {
         case GET_DATA:
             return {
                 ...state,
-                level: { goal: action.payload.data, hint: action.payload.hint },
+                level: {
+                    goal: action.payload.data,
+                    hint: action.payload.hint,
+                    pronunciation: action.payload.pronunciation,
+                },
                 scrambledData: action.payload.scrambledData,
                 totalChars: state.totalChars + action.payload.chars,
                 words: action.payload.data.split(" "),

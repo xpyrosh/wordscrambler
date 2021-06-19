@@ -17,7 +17,7 @@ const Scrambler = ({
     scrambler: {
         words,
         scrambledData,
-        level: { hint },
+        level: { hint, pronunciation },
         score,
         loading,
         success,
@@ -76,7 +76,11 @@ const Scrambler = ({
                     {scrambledData && (
                         <p id="scrambled-word">{scrambledData}</p>
                     )}
-                    <Dialog message={hint} mascot={bookguy} />
+                    <Dialog
+                        message={hint}
+                        pronunciation={pronunciation}
+                        mascot={bookguy}
+                    />
                     <p>Guess the sentence! Start typing</p>
                     <p>The yellow blocks are meant for spaces</p>
                     <h2>Score: {score}</h2>

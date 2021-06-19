@@ -1,6 +1,6 @@
 import React from "react";
 
-const Dialog = ({ message, mascot }) => {
+const Dialog = ({ message, mascot, pronunciation }) => {
     return (
         <div className="dialog">
             <img
@@ -10,6 +10,12 @@ const Dialog = ({ message, mascot }) => {
             />
             <div className="nes-balloon from-left">
                 <p>{message}</p>
+                {pronunciation && (
+                    <>
+                        <br />
+                        <p>It's pronounced.. "{pronunciation}"</p>
+                    </>
+                )}
             </div>
         </div>
     );

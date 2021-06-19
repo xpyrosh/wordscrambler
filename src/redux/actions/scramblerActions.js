@@ -16,7 +16,7 @@ export const getLevelData = (mode, score) => async (dispatch) => {
     try {
         setLoading();
 
-        let fetchURL, data, scrambledData, hint;
+        let fetchURL, data, scrambledData, hint, pronunciation;
 
         if (mode === "classic") {
             const level = score + 1;
@@ -34,17 +34,20 @@ export const getLevelData = (mode, score) => async (dispatch) => {
                     data = res.data.data.sentence;
                     scrambledData = scrambleData(res.data.data.sentence);
                     hint = "Decipher the sentence.";
+                    pronunciation = null;
                 } else if (mode === "words") {
                     data = res.data[0].word;
                     scrambledData = scrambleData(res.data[0].word);
                     hint = res.data[0].definition;
+                    pronunciation = res.data[0].pronunciation;
                 }
 
                 dispatch({
                     type: GET_DATA,
                     payload: {
                         data: data.toLowerCase(),
-                        hint: `Here's the description: "${hint}"`,
+                        hint: hint,
+                        pronunciation: pronunciation,
                         chars: data.split("").length,
                         scrambledData: scrambledData.toLowerCase(),
                     },
