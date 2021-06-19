@@ -81,6 +81,9 @@ const Scrambler = ({
                         pronunciation={pronunciation}
                         mascot={bookguy}
                     />
+                    {/* <button type="button" class="nes-btn is-primary">
+                        Hint
+                    </button> */}
                     <p>Guess the sentence! Start typing</p>
                     <p>The yellow blocks are meant for spaces</p>
                     <h2>Score: {score}</h2>
