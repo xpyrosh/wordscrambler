@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import bookguy from "../img/bookguy.png";
 import bookguytalk from "../img/bookguytalk.png";
 
+import backgroundMusic from "../img/backgroundmusic.wav";
+
 import Scrambler from "./Scrambler";
 import Dialog from "./Dialog";
 
@@ -16,9 +18,15 @@ const Home = ({ scrambler: { mode }, setMode }) => {
     const defaultMessage = "Let's play a word game. Select a mode.";
     const [message, setMessage] = useState(defaultMessage);
     const [mascot, setMascot] = useState(bookguy);
+    const [playMusic, setPlayMusic] = useState(false);
 
     return (
         <>
+            <div className="music-button">
+                <audio autoPlay={playMusic} loop={true} controls>
+                    <source src={backgroundMusic} type="audio/wav" />
+                </audio>
+            </div>
             {mode === "menu" ? (
                 <div className="home">
                     <h1 className="title">SCRAMBLER GAME</h1>

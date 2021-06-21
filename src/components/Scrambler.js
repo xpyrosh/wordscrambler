@@ -50,13 +50,18 @@ const Scrambler = ({
     const setFocusV2 = (words) => {
         for (let i = 0; i < words.length; i++) {
             let nextFocus;
-            for (let x = 0; x < words[i].length; x++) {
+            for (let x = 0; x <= words[i].length; x++) {
                 nextFocus = document.querySelector(
                     `textarea[name=char-${i}-${x}]`
                 );
 
                 if (!nextFocus.value) {
                     nextFocus.focus();
+                    return;
+                }
+
+                // return if we're at the last char of the last word because it crashes searching for something that doesn't exist
+                if (i === words.length - 1 && x === words[i].length - 1) {
                     return;
                 }
             }
