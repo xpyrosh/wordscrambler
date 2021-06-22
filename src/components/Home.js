@@ -13,9 +13,9 @@ import Dialog from "./Dialog";
 
 // redux imports
 import { connect } from "react-redux";
-import { setMode } from "../redux/actions/scramblerActions";
+import { setMode, clearGame } from "../redux/actions/scramblerActions";
 
-const Home = ({ scrambler: { mode }, setMode }) => {
+const Home = ({ scrambler: { mode }, setMode, clearGame }) => {
     const defaultMessage = "Let's play a word game. Select a mode.";
     const [message, setMessage] = useState(defaultMessage);
     const [mascot, setMascot] = useState(bookguy);
@@ -67,7 +67,10 @@ const Home = ({ scrambler: { mode }, setMode }) => {
             />
             <div
                 className="home-button nes-btn"
-                onClick={()=>setMode('menu')}
+                onClick={() => {
+                    clearGame();
+                    setMode("menu");
+                }}
             />
             {mode === "menu" ? (
                 <div className="home">
@@ -123,6 +126,7 @@ const Home = ({ scrambler: { mode }, setMode }) => {
 
 Home.propTypes = {
     setMode: PropTypes.func.isRequired,
+    clearGame: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -130,4 +134,4 @@ const mapStateToProps = (state) => ({
     scrambler: state.scrambler,
 });
 
-export default connect(mapStateToProps, { setMode })(Home);
+export default connect(mapStateToProps, { setMode, clearGame })(Home);

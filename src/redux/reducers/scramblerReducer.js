@@ -8,7 +8,7 @@ import {
     INCREMENT_MISTAKES,
     START_TIME,
     SET_MODE,
-    CLEAR_GAME
+    CLEAR_GAME,
 } from "../types";
 
 const initialState = {
@@ -87,6 +87,27 @@ export const scramblerReducer = (state = initialState, action) => {
             return {
                 ...state,
                 input: state.input.slice(0, -1),
+            };
+        case CLEAR_GAME:
+            return {
+                ...state,
+                score: 0,
+                level: {
+                    goal: null,
+                    hint: null,
+                    pronunciation: null,
+                },
+                scrambledData: null,
+                words: [],
+                input: [],
+                goal: [],
+                totalChars: 0,
+                mistakes: 0,
+                levelMistakes: 0,
+                startTime: null,
+                endTime: null,
+                success: false,
+                loading: false,
             };
         case SET_LOADING:
             return {

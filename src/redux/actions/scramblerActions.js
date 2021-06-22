@@ -8,7 +8,7 @@ import {
     INCREMENT_MISTAKES,
     START_TIME,
     SET_MODE,
-    CLEAR_GAME
+    CLEAR_GAME,
 } from "../types";
 import axios from "axios";
 
@@ -154,9 +154,9 @@ export const clearGame = () => (dispatch) => {
             type: CLEAR_GAME,
         });
     } catch (err) {
-        console.error(err)
+        console.error(err);
     }
-}
+};
 
 // SET LOADING
 export const setLoading = () => {
