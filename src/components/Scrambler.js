@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import Dialog from "./Dialog";
 import { Word } from "./Word";
 
-import bookguy from "../img/bookguy.png";
+import bookguy from "../media/bookguy.png";
 
 const Scrambler = ({
     scrambler: {

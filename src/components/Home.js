@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 
 // bookguy facial states
-import bookguy from "../img/bookguy.png";
-import bookguytalk from "../img/bookguytalk.png";
+import bookguy from "../media/bookguy.png";
+import bookguytalk from "../media/bookguytalk.png";
 
-import backgroundMusic from "../img/backgroundmusic.wav";
+// import music
+import backgroundMusic from "../media/backgroundmusic.wav";
 
 import Scrambler from "./Scrambler";
 import Dialog from "./Dialog";
@@ -18,15 +19,52 @@ const Home = ({ scrambler: { mode }, setMode }) => {
     const defaultMessage = "Let's play a word game. Select a mode.";
     const [message, setMessage] = useState(defaultMessage);
     const [mascot, setMascot] = useState(bookguy);
-    const [playMusic, setPlayMusic] = useState(false);
+
+    const [musicPlaying, setMusicPlaying] = useState(false);
+    const backgroundAudio = new Audio(backgroundMusic);
+    const musicRef = useRef(backgroundAudio);
+
+    musicRef.current.addEventListener(
+        "ended",
+        () => {
+            musicRef.current.currentTime = 0;
+            musicRef.current.play();
+        },
+        false
+    );
+
+    const startMusic = () => {
+        if (musicPlaying === false) {
+            musicRef.current.play();
+        }
+        setMusicPlaying(true);
+    };
+
+    const pauseMusic = () => {
+        if (musicPlaying === true) {
+            musicRef.current.pause();
+        }
+        setMusicPlaying(false);
+    };
 
     return (
         <>
-            <div className="music-button">
-                <audio autoPlay={playMusic} loop={true} controls>
-                    <source src={backgroundMusic} type="audio/wav" />
-                </audio>
-            </div>
+            <div
+                className="music-button"
+                onClick={() => {
+                    startMusic();
+                }}
+                // onMouseUp={() => setMusicPlaying(true)}
+                style={{ display: musicPlaying ? "none" : "block" }}
+            />
+            <div
+                className="pause-button"
+                onClick={() => {
+                    pauseMusic();
+                }}
+                // onMouseUp={() => setMusicPlaying(false)}
+                style={{ display: musicPlaying ? "block" : "none" }}
+            />
             {mode === "menu" ? (
                 <div className="home">
                     <h1 className="title">SCRAMBLER GAME</h1>
