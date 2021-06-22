@@ -8,6 +8,7 @@ import {
     INCREMENT_MISTAKES,
     START_TIME,
     SET_MODE,
+    CLEAR_GAME
 } from "../types";
 
 const initialState = {

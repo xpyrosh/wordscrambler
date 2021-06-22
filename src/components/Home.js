@@ -50,7 +50,7 @@ const Home = ({ scrambler: { mode }, setMode }) => {
     return (
         <>
             <div
-                className="music-button"
+                className="music-button nes-btn"
                 onClick={() => {
                     startMusic();
                 }}
@@ -58,12 +58,16 @@ const Home = ({ scrambler: { mode }, setMode }) => {
                 style={{ display: musicPlaying ? "none" : "block" }}
             />
             <div
-                className="pause-button"
+                className="pause-button nes-btn"
                 onClick={() => {
                     pauseMusic();
                 }}
                 // onMouseUp={() => setMusicPlaying(false)}
                 style={{ display: musicPlaying ? "block" : "none" }}
+            />
+            <div
+                className="home-button nes-btn"
+                onClick={()=>setMode('menu')}
             />
             {mode === "menu" ? (
                 <div className="home">
