@@ -34,8 +34,11 @@ const Character = ({
             // check phrase match and dispatch success state if true
             checkSuccess(input, goal);
         } else {
+            // to avoid incrementing mistakes on backspace
             setMatch(false);
-            incrementMistakes();
+            if (e.target.value !== ''){
+                incrementMistakes();
+            }
         }
 
         setFocus(e);
@@ -98,8 +101,11 @@ const Character = ({
     };
 
     const keyedDown = (e) => {
-        // check for space or a letter
-        if (e.keyCode === 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+        // check for valid inputs
+        // 32: space
+        // 189: hyphen
+        // 64-91: lowercase
+        if (e.keyCode === 32 || e.keyCode === 189 || (e.keyCode > 64 && e.keyCode < 91)) {
             if (!e.target.value) {
                 setInput(String.fromCharCode(e.keyCode).toLowerCase());
             }
@@ -110,7 +116,7 @@ const Character = ({
             setFocus(e, true);
         }
         // disable enter on text area
-        else if (e.keyCode === 13) {
+        else {
             e.preventDefault();
         }
     };

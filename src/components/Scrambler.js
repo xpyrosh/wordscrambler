@@ -23,6 +23,7 @@ const Scrambler = ({
         success,
         totalChars,
         mistakes,
+        levelMistakes,
         startTime,
         endTime,
         mode,
@@ -85,6 +86,7 @@ const Scrambler = ({
                         message={hint}
                         pronunciation={pronunciation}
                         mascot={bookguy}
+                        levelMistakes={levelMistakes}
                     />
                     {/* <button type="button" class="nes-btn is-primary">
                         Hint

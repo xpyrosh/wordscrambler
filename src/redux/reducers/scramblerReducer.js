@@ -24,6 +24,7 @@ const initialState = {
     mode: "menu",
     totalChars: 0,
     mistakes: 0,
+    levelMistakes: 0,
     startTime: null,
     endTime: null,
     success: false,
@@ -44,6 +45,7 @@ export const scramblerReducer = (state = initialState, action) => {
                 totalChars: state.totalChars + action.payload.chars,
                 words: action.payload.data.split(" "),
                 goal: action.payload.data.split(""),
+                levelMistakes: 0,
                 loading: false,
                 success: false,
             };
@@ -78,6 +80,7 @@ export const scramblerReducer = (state = initialState, action) => {
             return {
                 ...state,
                 mistakes: state.mistakes + 1,
+                levelMistakes: state.levelMistakes + 1,
             };
         case REMOVE_INPUT:
             return {
